@@ -2,13 +2,19 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+MODELS_DIR = BASE_DIR / "models"
+MODELS_DIR.mkdir(exist_ok=True)
 
 # datasets fake
-data1=pd.read_csv(r"C:\Users\hp\Desktop\Fake News Detection (NLP + SVM + Streamlit)\Fake.csv")
+data1 = pd.read_csv(DATA_DIR / "Fake.csv")
 # data1.head()
 
 # real data
-data2=pd.read_csv(r"C:\Users\hp\Desktop\Fake News Detection (NLP + SVM + Streamlit)\True.csv")
+data2 = pd.read_csv(DATA_DIR / "True.csv")
 # data2.head()
 
 #information
@@ -122,8 +128,8 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 #save model + Td-idf (for streamlit)
 import joblib
-joblib.dump(model, "fake_news_svm_model.pkl")
-joblib.dump(tfidf, "tfidf_vectorizer.pkl")
+joblib.dump(model, MODELS_DIR / "fake_news_svm_model.pkl")
+joblib.dump(tfidf, MODELS_DIR / "tfidf_vectorizer.pkl")
 # print("Model and Vectorizer Saved Successfully")
 
 
